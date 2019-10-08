@@ -1,0 +1,29 @@
+---
+title: "Bead Activity"
+author: "Samuel Lowry"
+date: "10/3/2019"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE, message = FALSE)
+library(googlesheets4)
+library(tidyverse)
+```
+
+```{r}
+sheets_deauth()
+x <- read_sheet("1cgP-e6THVfiW5TJ95QhX3jkNxKvc8Sicp9k_BkSRd2I") %>% 
+  na.omit() %>% 
+  mutate(proportion = red/25)
+```
+
+```{r}
+ ggplot(x, aes(x = proportion)) +
+  geom_histogram(bins = 31) +
+  labs(x = "Proportion of Red Beads",
+       y = "Count",
+       title = "Proportion of Red Beads",
+       subtitle = "Sample of 25")
+```
+
